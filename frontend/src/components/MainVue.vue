@@ -2,33 +2,21 @@
   <div>
     <HeaderVue></HeaderVue>
     <table>
-      <colgroup>
-        <col width="10%" />
-        <col width="20%" />
-        <col width="20%" />
-        <col width="20%" />
-        <col width="30%" />
-      </colgroup>
-      <thead>
-        <tr>
-          <th>No</th>
-          <th>작성자</th>
-          <th>제목</th>
-          <th>분류</th>
-          <th>내용</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="(posts, i) in this.postData" :key="i" id="Post">
-          <td>{{ i + 1 }}</td>
-          <td>{{ posts.owner }}</td>
-          <td>
-            {{ posts.title }}
-          </td>
-          <td>{{ posts.author }}</td>
-          <td>{{ posts.content }}</td>
-        </tr>
-      </tbody>
+      <tr v-for="(posts, i) in this.postData" :key="i" id="Post">
+        <div>
+          <div>
+            <td>{{ posts.owner }}</td>
+            <td>{{ posts.type }}</td>
+          </div>
+          <div>
+            <td>
+              <router-link :to="`/post/${posts._id}`">{{
+                posts.title
+              }}</router-link>
+            </td>
+          </div>
+        </div>
+      </tr>
     </table>
   </div>
 </template>
@@ -68,6 +56,7 @@ export default {
     //   }
     //   this.$router.push("/login");
     // },
+    goToDetail() {},
   },
   created() {
     this.fetchPost();
@@ -76,7 +65,42 @@ export default {
 </script>
 
 <styl lang="scss" scoped>
-#Post {
-  //   display: flex;
+table {
+  margin: 0 auto;
+  width: 80%;
+  border-top: 1px solid #ddd;
+  #Post {
+    display: flex;
+    width: 100%;
+    height: 8rem;
+    border-bottom: 1px solid #ddd;
+    padding: 1rem 2rem;
+    box-sizing: border-box;
+    > div {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      > div {
+        &:nth-child(1) {
+          display: flex;
+          justify-content: start;
+          height: 30%;
+          align-items: center;
+
+          > td {
+            &:nth-child(1) {
+              margin-right: 1rem;
+            }
+          }
+        }
+        &:nth-child(2) {
+          height: 70%;
+          display: flex;
+          align-items: center;
+        }
+      }
+    }
+  }
 }
 </styl>

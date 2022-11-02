@@ -16,6 +16,10 @@ const routes = [
     path: "/main",
     component: () => import("../views/MainView.vue"),
   },
+  {
+    path: "/post/:id",
+    component: () => import("../components/PostDetail.vue"),
+  },
   // {
   //   path: "/:catchAll(.*)",
   //   component: () => import("../views/NotFoundPage.vue"),

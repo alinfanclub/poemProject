@@ -39,8 +39,8 @@ Postrouter.get("/", async (req, res) => {
 Postrouter.get("/:id", async (req, res) => {
   try {
     const doc = await Post.findOne({
-      createdBy: req.user._id,
       _id: req.params.id,
+      // _id: req.params.id,
     })
       .lean()
       .exec();

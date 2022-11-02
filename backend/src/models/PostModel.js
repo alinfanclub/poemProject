@@ -6,7 +6,7 @@ const PostSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    author: {
+    type: {
       type: String,
       required: true,
     },
@@ -22,6 +22,10 @@ const PostSchema = new mongoose.Schema(
     owner: {
       type: String,
       required: true,
+    },
+    author: {
+      type: String,
+      require: true,
     },
     islive: { type: Boolean, require: true, default: false }, // islive = false 임시저장 상태
   },

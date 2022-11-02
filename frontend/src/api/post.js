@@ -19,5 +19,11 @@ function createPost(postData) {
 function getPost() {
   return instance.get("post");
 }
+function getPostDetail(id) {
+  return instance.get(`post/${id}`);
+}
+function deletePost(id) {
+  return instance.delete(`post/${id}`);
+}
 
-export { createPost, getPost };
+export { createPost, getPost, getPostDetail, deletePost };

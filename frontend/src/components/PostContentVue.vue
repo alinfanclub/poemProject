@@ -2,19 +2,24 @@
   <div>
     <form @submit.prevent="createNewPost">
       <div>
-        <label for="title"></label>
+        <label for="title">제목</label>
         <input type="text" name="title" id="title" v-model="title" />
       </div>
       <div>
-        <label for="author"></label>
-        <select id="author" v-model="author">
+        <label for="author">작가</label>
+        <input type="text" name="author" id="author" v-model="author" />
+      </div>
+      <div>
+        <label for="content">내용</label>
+        <textarea type="text" name="content" id="content" v-model="content" />
+      </div>
+
+      <div>
+        <label for="type">종류</label>
+        <select id="type" v-model="type">
           <option value="자작 시">자삭 시</option>
           <option value="가져온 시">가져온 시</option>
         </select>
-      </div>
-      <div>
-        <label for="content"></label>
-        <input type="text" name="content" id="content" v-model="content" />
       </div>
       <button>submit</button>
       <p v-if="logMsg">{{ logMsg }}</p>
@@ -28,7 +33,8 @@ export default {
   data() {
     return {
       title: "",
-      author: "자작 시",
+      type: "자작 시",
+      author: "",
       content: "",
       logMsg: "",
     };
@@ -38,7 +44,7 @@ export default {
       try {
         const postData = {
           title: this.title,
-          author: this.author,
+          type: this.type,
           content: this.content,
           owner: this.$store.state.userName,
         };

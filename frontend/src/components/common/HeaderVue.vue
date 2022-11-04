@@ -44,6 +44,11 @@ export default {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  position: sticky;
+  top: 0;
+  border-bottom: 1px solid #eee;
+  background-color: #fff;
+  margin-bottom: 50px;
 
   .login {
     display: flex;

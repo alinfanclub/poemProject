@@ -36,6 +36,23 @@ Postrouter.get("/", async (req, res) => {
   }
 });
 
+Postrouter.get("/ownpoem", async (req, res) => {
+  try {
+    const docs = await Post.find({
+      type: "자작 시",
+    })
+      .lean()
+      .exec();
+
+    res.status(200).json({
+      posts: docs,
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(400).json({ message: "sth wrong", error });
+  }
+});
+
 Postrouter.get("/:id", async (req, res) => {
   try {
     const doc = await Post.findOne({

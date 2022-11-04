@@ -22,13 +22,14 @@
 </template>
 
 <script>
-import { getPost } from "@/api/post";
+import { getPost, ownpoem } from "@/api/post";
 // import { deleteCookie } from "@/utils/cookies";
 import HeaderVue from "@/components/common/HeaderVue.vue";
 export default {
   data() {
     return {
       postData: [],
+      ownPoem: [],
     };
   },
   components: {
@@ -39,6 +40,16 @@ export default {
       try {
         const { data } = await getPost();
         this.postData = data.posts;
+      } catch (error) {
+        console.log(error);
+        alert("로그인 해주세요");
+        this.$router.push("/login");
+      }
+    },
+    async fetchPoem() {
+      try {
+        const { data } = await ownpoem();
+        this.ownPoem = data.posts;
       } catch (error) {
         console.log(error);
         alert("로그인 해주세요");
@@ -60,11 +71,12 @@ export default {
   },
   created() {
     this.fetchPost();
+    // this.fetchPoem();
   },
 };
 </script>
 
-<styl lang="scss" scoped>
+<styl lang="scss" scopped>
 table {
   margin: 0 auto;
   width: 80%;
@@ -84,7 +96,7 @@ table {
       > div {
         &:nth-child(1) {
           display: flex;
-          justify-content: start;
+          justify-content: flex-start;
           height: 30%;
           align-items: center;
 

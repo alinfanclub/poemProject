@@ -1,23 +1,23 @@
 <template>
   <div>
     <HeaderVue></HeaderVue>
-    <table>
-      <tr v-for="(posts, i) in this.postData" :key="i" id="Post">
+    <ul>
+      <li v-for="(posts, i) in this.postData" :key="i" id="Post">
         <div>
           <div>
-            <td>{{ posts.owner }}</td>
-            <td>{{ posts.type }}</td>
+            <div>{{ posts.owner }}</div>
+            <div>{{ posts.type }}</div>
           </div>
           <div>
-            <td>
+            <div>
               <router-link :to="`/post/${posts._id}`">{{
                 posts.title
               }}</router-link>
-            </td>
+            </div>
           </div>
         </div>
-      </tr>
-    </table>
+      </li>
+    </ul>
   </div>
 </template>
 
@@ -77,7 +77,7 @@ export default {
 </script>
 
 <styl lang="scss" scopped>
-table {
+ul {
   margin: 0 auto;
   width: 80%;
   border-top: 1px solid #ddd;
@@ -100,7 +100,7 @@ table {
           height: 30%;
           align-items: center;
 
-          > td {
+          > div {
             &:nth-child(1) {
               margin-right: 1rem;
             }

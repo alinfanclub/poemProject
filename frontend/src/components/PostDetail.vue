@@ -1,10 +1,15 @@
 <template>
   <div>
+    <button
+      v-if="postData.owner == this.$store.state.userName"
+      @click="deleteThis"
+    >
+      delete
+    </button>
     <h1>{{ postData.title }}</h1>
     <div class="content">
       {{ postData.content }}
     </div>
-    <button @click="deleteThis">delete</button>
     <p v-if="error">{{ this.error }}</p>
   </div>
 </template>

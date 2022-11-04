@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="createPost">
     <form @submit.prevent="createNewPost">
       <div>
         <label for="title">제목</label>
@@ -58,4 +58,14 @@ export default {
 };
 </script>
 
-<style></style>
+<style lang="scss">
+#createPost {
+  width: 90%;
+  margin: 0 auto;
+
+  > form {
+    display: flex;
+    flex-direction: column;
+  }
+}
+</style>

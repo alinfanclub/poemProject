@@ -152,16 +152,17 @@ export default {
   align-items: center;
 
   margin-top: 10rem;
+
   div.poem_area {
     height: fit-content;
-    min-height: 20rem;
+    min-height: 29.8rem;
     width: 49%;
-
     margin-bottom: 4rem;
     // border: 1px solid #ddd;
-    background-color: rgba($color: #ffffff, $alpha: 0.5);
+    background-color: rgba($color: #ffffff, $alpha: 1);
     border-radius: 20px;
     box-shadow: 5px 5px 10px rgba($color: #000, $alpha: 0.3);
+
     > div.poem_area_header {
       display: flex;
       align-items: center;
@@ -217,11 +218,78 @@ export default {
 }
 
 @media screen and (max-width: 768px) {
+  #Main {
+    width: 100%;
+  }
   #poemMain {
+    width: 90%;
+    margin: 0 auto;
+    display: flex;
+    margin-top: 0;
+    justify-content: space-between;
     flex-direction: column;
-
-    > div.poem_area {
+    align-items: center;
+    div.poem_area {
+      height: fit-content;
+      min-height: 20rem;
       width: 100%;
+
+      margin-bottom: 2rem;
+      // border: 1px solid #ddd;
+      background-color: rgba($color: #ffffff, $alpha: 1);
+      border-radius: 20px;
+      box-shadow: 5px 5px 10px rgba($color: #000, $alpha: 0.3);
+      > div.poem_area_header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 80%;
+        margin: 0 auto;
+        padding: 2rem;
+      }
+      > ul {
+        margin: 0 auto;
+        width: 80%;
+        overflow-y: auto;
+        height: 100%;
+        > #Post {
+          display: flex;
+          width: 100%;
+          height: 5rem;
+          border-bottom: 1px solid #ddd;
+          // padding: 1rem 2rem;
+          box-sizing: border-box;
+          margin-bottom: 0.5rem;
+
+          &:last-child {
+            border-bottom: none;
+          }
+          > div {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            > div {
+              &:nth-child(1) {
+                display: flex;
+                justify-content: flex-start;
+                height: 30%;
+                align-items: center;
+
+                > div {
+                  &:nth-child(1) {
+                    margin-right: 1rem;
+                  }
+                }
+              }
+              &:nth-child(2) {
+                display: flex;
+                align-items: center;
+              }
+            }
+          }
+        }
+      }
     }
   }
 }

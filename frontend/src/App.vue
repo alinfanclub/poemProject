@@ -9,13 +9,15 @@ export default {
 };
 </script>
 
-<style lnag="scss">
+<style lang="scss">
 #app {
   min-height: 100vh;
   margin: 0 auto;
-  background-image: url(@/assets/paper_texture02.jpg);
+  /* background-image: url(@/assets/paper_texture02.jpg); */
+  background-color: #f2f2f2;
   background-repeat: no-repeat;
   background-size: cover;
+  font-family: "Poppins", sans-serif;
 }
 * {
   margin: 0;

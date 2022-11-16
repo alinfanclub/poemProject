@@ -1,28 +1,61 @@
 <template>
-  <div id="peomDetail">
-    <button
-      v-if="postData.owner == this.$store.state.userName"
-      @click="deleteThis"
-    >
-      delete
-    </button>
-    <h1>{{ postData.title }}</h1>
-    <small>{{ postData.author }}</small>
-    <div class="content">
+  <div>
+    <HeaderVue></HeaderVue>
+    <div id="peomDetail">
+      <div class="Detail_head">
+        <div class="poemInfo_title">
+          <h1>{{ postData.title }}</h1>
+          <div class="small_title">
+            <small>{{ postData.author }}</small>
+            <small>&nbsp;/ 작성자 : {{ postData.owner }}</small>
+          </div>
+        </div>
+        <div>
+          <button
+            v-if="postData.owner == this.$store.state.userName"
+            @click="deleteThis"
+          >
+            <ion-icon name="trash-outline"></ion-icon>
+          </button>
+          <button
+            v-if="postData.owner == this.$store.state.userName"
+            @click="updateThis"
+          >
+            <ion-icon name="pencil-outline"></ion-icon>
+          </button>
+        </div>
+      </div>
+      <!-- <div class="content">
       {{ postData.content }}
+    </div> -->
+      <div id="viewer"></div>
+      <p v-if="error">{{ this.error }}</p>
     </div>
-    <p v-if="error">{{ this.error }}</p>
   </div>
 </template>
 
 <script>
 import { getPostDetail, deletePost } from "@/api/post";
+import Viewer from "@toast-ui/editor/dist/toastui-editor-viewer";
+import "@toast-ui/editor/dist/toastui-editor.css";
+import HeaderVue from "@/components/common/HeaderVue.vue";
 export default {
   data() {
     return {
       postData: "",
       error: "",
+      viewer: null,
     };
+  },
+  mounted() {
+    // this.viewer = new Viewer({
+    //   el: document.querySelector("#viewer"),
+    //   initialValue: `${this.postData.content}`,
+    //   previewStyle: "vertical",
+    // });
+  },
+  components: {
+    HeaderVue,
   },
   methods: {
     async getPostDetail() {
@@ -30,6 +63,13 @@ export default {
         const id = this.$route.params.id;
         const { data } = await getPostDetail(id);
         this.postData = data;
+        this.viewer = new Viewer({
+          el: document.querySelector("#viewer"),
+          initialValue: `${this.postData.content}`,
+          previewHighlight: false,
+          previewStyle: "vertical",
+          toolbarItems: null,
+        });
       } catch (error) {
         console.log(error);
       }
@@ -51,19 +91,126 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
+@import url("https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@200;300;400;500;600;700;900&display=swap");
 * {
   text-align: left;
 }
 #peomDetail {
+  background-color: #fff;
+  overflow-y: auto;
+  width: 50%;
+  margin: 0 auto;
   padding: 1rem;
-  h1 {
-    font-size: 3rem;
+  font-family: "Noto Serif KR", serif;
+
+  .Detail_head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 2rem;
+
+    > div.poemInfo_title {
+      display: flex;
+      align-items: flex-end;
+
+      > div.small_title {
+        padding-bottom: 0.5rem;
+      }
+
+      h1 {
+        font-size: 3rem;
+        margin-right: 1rem;
+      }
+      small {
+        padding-bottom: 0.5rem;
+      }
+    }
   }
-  div.content {
-    white-space: pre;
-    text-align: left;
-    min-height: 50rem;
+  button {
+    background-color: transparent;
+    border: none;
+    padding: 0.2rem;
+    &:hover {
+      background-color: #ababab;
+      border-radius: 50px;
+    }
+    ion-icon {
+      font-size: 1.5rem;
+    }
+  }
+}
+#viewer {
+  min-height: 80vh;
+  height: fit-content;
+  padding: 2rem;
+  box-sizing: border-box;
+
+  .toastui-editor-contents pre code {
+    font-family: "Noto Serif KR", serif;
+  }
+  .toastui-editor-contents {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 800px) {
+  #peomDetail {
+    background-color: #fff;
+    overflow-y: auto;
+    width: 90%;
+    margin: 0 auto;
+    padding: 0.5rem;
+    font-family: "Noto Serif KR", serif;
+
+    .Detail_head {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      padding: 0 0.5rem;
+
+      > div.poemInfo_title {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+
+        h1 {
+          font-size: 1.5rem;
+          margin-right: 1rem;
+          margin-bottom: 0.5rem;
+        }
+        small {
+          padding-bottom: 0.5rem;
+        }
+      }
+    }
+    button {
+      background-color: transparent;
+      border: none;
+      margin-top: 0.5rem;
+      padding: 0.2rem;
+      &:hover {
+        background-color: #ababab;
+        border-radius: 50px;
+      }
+      ion-icon {
+        font-size: 1rem;
+      }
+    }
+  }
+  #viewer {
+    min-height: 80vh;
+    height: fit-content;
+    padding: 0.5rem;
+    box-sizing: border-box;
+    margin-top: 1rem;
+
+    .toastui-editor-contents pre code {
+      font-family: "Noto Serif KR", serif;
+    }
+    .toastui-editor-contents {
+      font-size: 0.9rem;
+    }
   }
 }
 </style>

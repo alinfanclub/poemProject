@@ -46,9 +46,9 @@ export default {
   justify-content: space-between;
   position: sticky;
   top: 0;
-  border-bottom: 1px solid #eee;
-  background-color: #fff;
   margin-bottom: 50px;
+  height: 5rem;
+  padding: 0 1rem;
 
   .login {
     display: flex;

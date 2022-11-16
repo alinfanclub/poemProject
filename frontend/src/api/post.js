@@ -28,5 +28,15 @@ function deletePost(id) {
 function ownpoem() {
   return instance.get("post/ownpoem");
 }
+function importedPoem() {
+  return instance.get("post/importedPoem");
+}
 
-export { createPost, getPost, getPostDetail, deletePost, ownpoem };
+export {
+  createPost,
+  getPost,
+  getPostDetail,
+  deletePost,
+  ownpoem,
+  importedPoem,
+};

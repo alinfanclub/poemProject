@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="peomDetail">
     <button
       v-if="postData.owner == this.$store.state.userName"
       @click="deleteThis"
@@ -7,6 +7,7 @@
       delete
     </button>
     <h1>{{ postData.title }}</h1>
+    <small>{{ postData.author }}</small>
     <div class="content">
       {{ postData.content }}
     </div>
@@ -50,13 +51,19 @@ export default {
 };
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 * {
   text-align: left;
 }
-div.content {
-  white-space: pre;
-  text-align: left;
-  min-height: 50rem;
+#peomDetail {
+  padding: 1rem;
+  h1 {
+    font-size: 3rem;
+  }
+  div.content {
+    white-space: pre;
+    text-align: left;
+    min-height: 50rem;
+  }
 }
 </style>

@@ -52,6 +52,22 @@ Postrouter.get("/ownpoem", async (req, res) => {
     res.status(400).json({ message: "sth wrong", error });
   }
 });
+Postrouter.get("/importedPoem", async (req, res) => {
+  try {
+    const docs = await Post.find({
+      type: "가져온 시",
+    })
+      .lean()
+      .exec();
+
+    res.status(200).json({
+      posts: docs,
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(400).json({ message: "sth wrong", error });
+  }
+});
 
 Postrouter.get("/:id", async (req, res) => {
   try {

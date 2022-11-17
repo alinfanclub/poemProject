@@ -8,7 +8,6 @@ const chalk = require("chalk");
 const { ServerApiVersion } = require("mongodb");
 const { router, Postrouter } = require("./src/api");
 const { authenticateUser } = require("./src/utils/auth");
-require("dotenv").config();
 
 // mongodb URL
 const MONGO_URI =
@@ -16,7 +15,7 @@ const MONGO_URI =
 
 const sever = async () => {
   try {
-    await mongoose.connect(process.env.MONGO_URI || MONGO_URI);
+    await mongoose.connect(MONGO_URI);
     mongoose.set("debug", true);
     console.log("mongoDB is connected!");
     app.use(express.json());
@@ -29,11 +28,11 @@ const sever = async () => {
 
     // server setup
     async function configServer() {
-      port = process.env.PORT || (await detectPort(3000)) || 3000;
+      port = 3000 || (await detectPort(3000)) || 3000;
     }
     configServer();
 
-    app.listen(process.env.PORT || port, () =>
+    app.listen(port, () =>
       console.log(
         `${chalk.white.bgHex("#41b883").bold(`SERVER IS RUNNING ON ${port}`)}`
       )

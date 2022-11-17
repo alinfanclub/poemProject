@@ -198,6 +198,8 @@ export default {
               justify-content: flex-start;
               height: 30%;
               align-items: center;
+              font-size: 0.9rem;
+              color: #aaa;
 
               > div {
                 &:nth-child(1) {
@@ -209,6 +211,7 @@ export default {
               height: 70%;
               display: flex;
               align-items: center;
+              font-size: 1.5rem;
             }
           }
         }
@@ -217,7 +220,7 @@ export default {
   }
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 800px) {
   #Main {
     width: 100%;
   }

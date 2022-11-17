@@ -77,8 +77,11 @@ export default {
     async deleteThis() {
       try {
         const id = this.$route.params.id;
-        await deletePost(id);
-        this.$router.push("/main");
+        const con_delete = confirm("정말로 삭제 하시겠습니까?");
+        if (con_delete) {
+          await deletePost(id);
+          this.$router.push("/main");
+        }
       } catch (err) {
         this.error = err.message;
         console.log(err);
@@ -141,19 +144,72 @@ export default {
   }
 }
 #viewer {
-  min-height: 80vh;
+  min-height: calc(100vh - 200px);
   height: fit-content;
   padding: 2rem;
   box-sizing: border-box;
 
-  .toastui-editor-contents pre code {
+  .toastui-editor-contents pre code,
+  .toastui-editor-contents {
     font-family: "Noto Serif KR", serif;
   }
   .toastui-editor-contents {
     font-size: 1rem;
   }
 }
+@media (max-width: 1320px) {
+  #peomDetail {
+    .Detail_head {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      padding: 0 0.5rem;
 
+      > div.poemInfo_title {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+
+        h1 {
+          font-size: 2.5rem;
+          margin-right: 1rem;
+          margin-bottom: 0.5rem;
+        }
+        small {
+          padding-bottom: 0.5rem;
+        }
+      }
+    }
+    button {
+      background-color: transparent;
+      border: none;
+      margin-top: 0.5rem;
+      padding: 0.2rem;
+      &:hover {
+        background-color: #ababab;
+        border-radius: 50px;
+      }
+      ion-icon {
+        font-size: 1rem;
+      }
+    }
+  }
+  #viewer {
+    min-height: calc(100vh - 215px);
+    height: fit-content;
+    padding: 0.5rem;
+    box-sizing: border-box;
+    margin-top: 1rem;
+
+    .toastui-editor-contents pre code,
+    .toastui-editor-contents {
+      font-family: "Noto Serif KR", serif;
+    }
+    .toastui-editor-contents {
+      font-size: 0.9rem;
+    }
+  }
+}
 @media (max-width: 800px) {
   #peomDetail {
     background-color: #fff;
@@ -199,13 +255,14 @@ export default {
     }
   }
   #viewer {
-    min-height: 80vh;
+    min-height: calc(100vh - 215px);
     height: fit-content;
     padding: 0.5rem;
     box-sizing: border-box;
     margin-top: 1rem;
 
-    .toastui-editor-contents pre code {
+    .toastui-editor-contents pre code,
+    .toastui-editor-contents {
       font-family: "Noto Serif KR", serif;
     }
     .toastui-editor-contents {

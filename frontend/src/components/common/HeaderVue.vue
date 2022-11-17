@@ -48,7 +48,7 @@ export default {
       this.$router.push("/login");
     },
     mb_toggle() {
-      if (this.mb_menu == false) {
+      if (this.mb_menu == false && window.innerWidth <= 800) {
         this.mb_menu = true;
       } else {
         this.mb_menu = false;

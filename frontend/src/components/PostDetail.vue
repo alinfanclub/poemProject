@@ -39,6 +39,11 @@ import { getPostDetail, deletePost } from "@/api/post";
 import Viewer from "@toast-ui/editor/dist/toastui-editor-viewer";
 import "@toast-ui/editor/dist/toastui-editor.css";
 import HeaderVue from "@/components/common/HeaderVue.vue";
+import "prismjs/themes/prism.css";
+import "@toast-ui/editor-plugin-code-syntax-highlight/dist/toastui-editor-plugin-code-syntax-highlight.css";
+import Prism from "prismjs";
+import "prismjs/components/prism-clojure.js";
+import codeSyntaxHighlight from "@toast-ui/editor-plugin-code-syntax-highlight";
 export default {
   data() {
     return {
@@ -69,6 +74,7 @@ export default {
           previewHighlight: false,
           previewStyle: "vertical",
           toolbarItems: null,
+          plugins: [[codeSyntaxHighlight, { highlighter: Prism }]],
         });
       } catch (error) {
         console.log(error);
@@ -122,7 +128,7 @@ export default {
       }
 
       h1 {
-        font-size: 3rem;
+        font-size: 2rem;
         margin-right: 1rem;
       }
       small {

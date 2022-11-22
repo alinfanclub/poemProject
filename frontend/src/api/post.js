@@ -4,7 +4,7 @@ import { setInterceptors } from "@/api/interceptor";
 
 function crateInstance() {
   const instance = axios.create({
-    baseURL: "http://13.231.63.76:3000/",
+    baseURL: "d1cuv13t5kqbgp.cloudfront.net/",
   });
   return setInterceptors(instance);
 }

@@ -7,6 +7,21 @@ const { User } = require("../models/UserModel");
 const router = Router();
 
 router.post("/login", (req, res) => {
+      // Website you wish to allow to connect
+      res.setHeader('Access-Control-Allow-Origin', '*');
+  
+      // Request methods you wish to allow
+      res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+  
+      // Request headers you wish to allow
+      res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+  
+      // Set to true if you need the website to include cookies in the requests sent
+      // to the API (e.g. in case you use sessions)
+      res.setHeader('Access-Control-Allow-Credentials', true);
+  
+      // Pass to next layer of middleware
+      next();
   // find the user
   User.findOne({
     username: req.body.username,
@@ -49,6 +64,21 @@ router.post("/login", (req, res) => {
 });
 
 router.post("/signup", (req, res) => {
+      // Website you wish to allow to connect
+      res.setHeader('Access-Control-Allow-Origin', '*');
+  
+      // Request methods you wish to allow
+      res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+  
+      // Request headers you wish to allow
+      res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+  
+      // Set to true if you need the website to include cookies in the requests sent
+      // to the API (e.g. in case you use sessions)
+      res.setHeader('Access-Control-Allow-Credentials', true);
+  
+      // Pass to next layer of middleware
+      next();
   const { username, password, nickname } = req.body;
   // encrypt password
   // NOTE: 10 is saltround which is a cost factor

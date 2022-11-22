@@ -19,10 +19,7 @@ const sever = async () => {
     mongoose.set("debug", true);
     console.log("mongoDB is connected!");
     app.use(express.json());
-    app.use(cors({
-      origin: "*",
-      credentials: true,
-    }));
+    app.use(cors());
 
     // api
     app.use("/user", router);

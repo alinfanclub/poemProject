@@ -85,8 +85,8 @@ export default {
         this.importedPoem = data.posts;
       } catch (error) {
         console.log(error);
-        alert("로그인 해주세요");
-        this.$router.push("/login");
+        // alert("로그인 해주세요");
+        // this.$router.push("/login");
       }
     },
     async fetchCreatePoem() {
@@ -95,8 +95,8 @@ export default {
         this.ownPoem = data.posts;
       } catch (error) {
         console.log(error);
-        alert("로그인 해주세요");
-        this.$router.push("/login");
+        // alert("로그인 해주세요");
+        // this.$router.push("/login");
       }
     },
     // async logOut() {

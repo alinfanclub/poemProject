@@ -22,19 +22,19 @@
 </template>
 
 <script>
-import { ownpoem } from "@/api/post";
+import { importedPoem } from "@/api/post";
 import HeaderVue from "./common/HeaderVue.vue";
 export default {
   data() {
     return {
-      ownPoem: [],
+      importedPoem: [],
     };
   },
   methods: {
     async fetchCreatePoem() {
       try {
-        const { data } = await ownpoem();
-        this.ownPoem = data.posts;
+        const { data } = await importedPoem();
+        this.importedPoem = data.posts;
       } catch (error) {
         console.log(error);
         alert("로그인 해주세요");
@@ -50,7 +50,7 @@ export default {
   },
   computed: {
     sliceCreatePoem() {
-      let sliceCreatePoem = [...this.ownPoem].reverse();
+      let sliceCreatePoem = [...this.importedPoem].reverse();
       return sliceCreatePoem;
     },
   },

@@ -36,6 +36,10 @@ const routes = [
     path: "/post/ownpoem",
     component: () => import("../components/PostOwnPoem.vue"),
   },
+  {
+    path: "/post/imported",
+    component: () => import("../components/PostImportedPoem.vue"),
+  },
 ];
 
 const router = createRouter({

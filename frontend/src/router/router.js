@@ -20,6 +20,10 @@ const routes = [
     path: "/post/:id",
     component: () => import("../components/PostDetail.vue"),
   },
+  {
+    path: "/post/update/:id",
+    component: () => import("../views/UpDateView.vue"),
+  },
   // {
   //   path: "/:catchAll(.*)",
   //   component: () => import("../views/NotFoundPage.vue"),
@@ -27,6 +31,10 @@ const routes = [
   {
     path: "/write",
     component: () => import("../views/PostContentView.vue"),
+  },
+  {
+    path: "/post/ownpoem",
+    component: () => import("../components/PostOwnPoem.vue"),
   },
 ];
 

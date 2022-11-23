@@ -4,7 +4,7 @@ import { setInterceptors } from "@/api/interceptor";
 
 function crateInstance() {
   const instance = axios.create({
-    baseURL: "https://kodpp.com/",
+    baseURL: "http://localhost:3000/",
   });
   return setInterceptors(instance);
 }
@@ -31,6 +31,9 @@ function ownpoem() {
 function importedPoem() {
   return instance.get("post/importedPoem");
 }
+function updatePost(id, postData) {
+  return instance.put(`post/${id}`, postData);
+}
 
 export {
   createPost,
@@ -39,4 +42,5 @@ export {
   deletePost,
   ownpoem,
   importedPoem,
+  updatePost,
 };

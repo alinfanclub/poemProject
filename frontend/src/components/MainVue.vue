@@ -5,7 +5,7 @@
       <div class="poem_area">
         <div class="poem_area_header">
           <h2>창작시</h2>
-          <router-link to="/">더보기</router-link>
+          <router-link to="/post/ownpoem">더보기</router-link>
         </div>
         <ul>
           <li v-for="(posts, i) in this.sliceCreatePoem" :key="i" id="Post">

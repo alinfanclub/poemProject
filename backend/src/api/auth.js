@@ -7,7 +7,6 @@ const { User } = require("../models/UserModel");
 const router = Router();
 
 router.post("/login", (req, res) => {
-
   // find the user
   User.findOne({
     username: req.body.username,
@@ -50,7 +49,6 @@ router.post("/login", (req, res) => {
 });
 
 router.post("/signup", (req, res) => {
-
   const { username, password, nickname } = req.body;
   // encrypt password
   // NOTE: 10 is saltround which is a cost factor

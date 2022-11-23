@@ -6,6 +6,7 @@ const store = createStore({
     return {
       userName: getUserFromCookie() || "",
       token: getAuthFromCookie() || "",
+      postDate: [],
     };
   },
   getters: {

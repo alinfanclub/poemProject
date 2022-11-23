@@ -19,11 +19,6 @@ const sever = async () => {
     mongoose.set("debug", true);
     console.log("mongoDB is connected!");
     app.use(express.json());
-
-    app.use(function (req, res, next) {
-
-
-  });
     app.use(cors());
     
     // api

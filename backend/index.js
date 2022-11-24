@@ -1,13 +1,10 @@
 const mongoose = require("mongoose");
 const cors = require("cors");
 const bodyparser = require("body-parser");
-const morgan = require("morgan");
 const express = require("express");
 const app = express();
 const chalk = require("chalk");
-const { ServerApiVersion } = require("mongodb");
 const { router, Postrouter } = require("./src/api");
-const { authenticateUser } = require("./src/utils/auth");
 
 // mongodb URL
 const MONGO_URI =
@@ -25,11 +22,7 @@ const sever = async () => {
       res.header("Access-Control-Allow-Methods", "OPTIONS,POST,GET,PUT,DELETE");
       next();
     });
-    app.use(
-      cors({
-        origin: "*",
-      })
-    );
+    app.use(cors());
     // api
     app.use("/user", router);
     app.use("/post", Postrouter);

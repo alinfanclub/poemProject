@@ -75,10 +75,6 @@ li {
       padding: 1rem 1rem;
       box-sizing: border-box;
 
-      &:nth-child(1) {
-        // border-top: 1px solid #333;
-      }
-
       div.list_item {
         > div {
           &:nth-child(1) {

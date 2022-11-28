@@ -7,6 +7,7 @@ const { User } = require("../models/UserModel");
 const routerUser = Router();
 
 routerUser.post("/login", (req, res) => {
+  res.header("Access-Control-Allow-Origin", "*");
   // find the user
   User.findOne({
     username: req.body.username,
@@ -49,6 +50,7 @@ routerUser.post("/login", (req, res) => {
 });
 
 routerUser.post("/signup", (req, res) => {
+  res.header("Access-Control-Allow-Origin", "*");
   const { username, password, nickname } = req.body;
   // encrypt password
   // NOTE: 10 is saltround which is a cost factor

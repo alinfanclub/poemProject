@@ -1,13 +1,10 @@
 const mongoose = require("mongoose");
 const cors = require("cors");
 const bodyparser = require("body-parser");
-const morgan = require("morgan");
 const express = require("express");
 const app = express();
 const chalk = require("chalk");
-const { ServerApiVersion } = require("mongodb");
 const { router, Postrouter } = require("./src/api");
-const { authenticateUser } = require("./src/utils/auth");
 
 // mongodb URL
 const MONGO_URI =
@@ -19,6 +16,12 @@ const sever = async () => {
     mongoose.set("debug", true);
     console.log("mongoDB is connected!");
     app.use(express.json());
+    app.all("/*", function (req, res, next) {
+      res.header("Access-Control-Allow-Origin", "http://localhost:8080");
+      res.header("Access-Control-Allow-Headers", "X-Requested-With");
+      res.header("Access-Control-Allow-Methods", "OPTIONS,POST,GET,PUT,DELETE");
+      next();
+    });
     app.use(cors());
     // api
     app.use("/user", router);

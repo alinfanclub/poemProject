@@ -5,7 +5,7 @@
       <div class="poem_area">
         <div class="poem_area_header">
           <h2>창작시</h2>
-          <router-link to="/">더보기</router-link>
+          <router-link to="/post/ownpoem">더보기</router-link>
         </div>
         <ul>
           <li v-for="(posts, i) in this.sliceCreatePoem" :key="i" id="Post">
@@ -29,7 +29,7 @@
       <div class="poem_area">
         <div class="poem_area_header">
           <h2>가져온 시</h2>
-          <router-link to="/">더보기</router-link>
+          <router-link to="/post/imported">더보기</router-link>
         </div>
         <ul>
           <li v-for="(posts, i) in this.sliceImportPoem" :key="i" id="Post">
@@ -49,6 +49,9 @@
           </li>
         </ul>
       </div>
+    </div>
+    <div class="showAll">
+      <router-link to="/"> 전체 보기 </router-link>
     </div>
   </div>
 </template>
@@ -218,6 +221,12 @@ export default {
       }
     }
   }
+}
+
+.showAll {
+  display: flex;
+  justify-content: center;
+  padding: 1rem 0;
 }
 
 @media screen and (max-width: 800px) {

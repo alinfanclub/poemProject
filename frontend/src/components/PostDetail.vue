@@ -17,11 +17,10 @@
           >
             <ion-icon name="trash-outline"></ion-icon>
           </button>
-          <button
-            v-if="postData.owner == this.$store.state.userName"
-            @click="updateThis"
-          >
-            <ion-icon name="pencil-outline"></ion-icon>
+          <button v-if="postData.owner == this.$store.state.userName">
+            <router-link :to="`/post/update/${postData._id}`" replace
+              ><ion-icon name="pencil-outline"></ion-icon
+            ></router-link>
           </button>
         </div>
       </div>

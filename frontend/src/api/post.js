@@ -31,6 +31,9 @@ function ownpoem() {
 function importedPoem() {
   return instance.get("post/importedPoem");
 }
+function updatePost(id, postData) {
+  return instance.put(`post/${id}`, postData);
+}
 
 export {
   createPost,
@@ -39,4 +42,5 @@ export {
   deletePost,
   ownpoem,
   importedPoem,
+  updatePost,
 };

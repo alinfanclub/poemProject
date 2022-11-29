@@ -5,6 +5,7 @@ const { authenticateUser } = require("../utils/auth");
 
 Postrouter.post("/", authenticateUser, async (req, res) => {
   try {
+    res.header("Access-Control-Allow-Origin", "*");
     const doc = await Post.create({
       ...req.body,
       createdBy: req.user._id,
@@ -21,6 +22,7 @@ Postrouter.post("/", authenticateUser, async (req, res) => {
 
 Postrouter.get("/", async (req, res) => {
   try {
+    res.header("Access-Control-Allow-Origin", "*");
     const docs = await Post.find({
       // createdBy: req.user._id,
     })
@@ -38,6 +40,7 @@ Postrouter.get("/", async (req, res) => {
 
 Postrouter.get("/ownpoem", async (req, res) => {
   try {
+    res.header("Access-Control-Allow-Origin", "*");
     const docs = await Post.find({
       type: "자작 시",
     })
@@ -54,6 +57,7 @@ Postrouter.get("/ownpoem", async (req, res) => {
 });
 Postrouter.get("/importedPoem", async (req, res) => {
   try {
+    res.header("Access-Control-Allow-Origin", "*");
     const docs = await Post.find({
       type: "가져온 시",
     })
@@ -71,6 +75,7 @@ Postrouter.get("/importedPoem", async (req, res) => {
 
 Postrouter.get("/:id", async (req, res) => {
   try {
+    res.header("Access-Control-Allow-Origin", "*");
     const doc = await Post.findOne({
       _id: req.params.id,
       // _id: req.params.id,
@@ -91,6 +96,7 @@ Postrouter.get("/:id", async (req, res) => {
 
 Postrouter.put("/:id", authenticateUser, async (req, res) => {
   try {
+    res.header("Access-Control-Allow-Origin", "*");
     const updatedDoc = await Post.findOneAndUpdate(
       {
         createdBy: req.user._id,
@@ -115,6 +121,7 @@ Postrouter.put("/:id", authenticateUser, async (req, res) => {
 
 Postrouter.delete("/:id", authenticateUser, async (req, res) => {
   try {
+    res.header("Access-Control-Allow-Origin", "*");
     const removed = await Post.findOneAndRemove({
       createdBy: req.user._id,
       _id: req.params.id,

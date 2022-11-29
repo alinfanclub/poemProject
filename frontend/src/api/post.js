@@ -2,6 +2,12 @@ import axios from "axios";
 // import store from "@/store/index";
 import { setInterceptors } from "@/api/interceptor";
 
+// function crateInstance() {
+//   const instance = axios.create({
+//     baseURL: "http://localhost:3000/",
+//   });
+//   return setInterceptors(instance);
+// }
 function crateInstance() {
   const instance = axios.create({
     baseURL: "http://localhost:3000/",

@@ -4,9 +4,10 @@ const { Router } = require("express");
 const { newToken } = require("../utils/auth.js");
 const { User } = require("../models/UserModel");
 
-const router = Router();
+const routerUser = Router();
 
-router.post("/login", (req, res) => {
+routerUser.post("/login", (req, res) => {
+  res.header("Access-Control-Allow-Origin", "*");
   // find the user
   User.findOne({
     username: req.body.username,
@@ -48,7 +49,8 @@ router.post("/login", (req, res) => {
     });
 });
 
-router.post("/signup", (req, res) => {
+routerUser.post("/signup", (req, res) => {
+  res.header("Access-Control-Allow-Origin", "*");
   const { username, password, nickname } = req.body;
   // encrypt password
   // NOTE: 10 is saltround which is a cost factor
@@ -78,5 +80,5 @@ router.post("/signup", (req, res) => {
 });
 
 module.exports = {
-  router,
+  routerUser,
 };

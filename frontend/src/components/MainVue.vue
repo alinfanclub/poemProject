@@ -51,7 +51,7 @@
       </div>
     </div>
     <div class="showAll">
-      <router-link to="/"> 전체 보기 </router-link>
+      <router-link to="/post/poemAll"> 전체 보기 </router-link>
     </div>
   </div>
 </template>

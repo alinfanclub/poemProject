@@ -18,7 +18,7 @@ const routes = [
   },
   {
     path: "/post/:id",
-    component: () => import("../components/PostDetail.vue"),
+    component: () => import("../components/PoemDetail.vue"),
   },
   {
     path: "/post/update/:id",
@@ -34,11 +34,15 @@ const routes = [
   },
   {
     path: "/post/ownpoem",
-    component: () => import("../components/PostOwnPoem.vue"),
+    component: () => import("../components/PoemOwn.vue"),
   },
   {
     path: "/post/imported",
-    component: () => import("../components/PostImportedPoem.vue"),
+    component: () => import("../components/PoemImported.vue"),
+  },
+  {
+    path: "/post/poemAll",
+    component: () => import("../components/PoemAll.vue"),
   },
 ];
 

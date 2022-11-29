@@ -1,7 +1,7 @@
 <template>
   <div>
     <header-vue></header-vue>
-    <div id="ownPoemArea">
+    <div id="ShowPoemArea">
       <ul>
         <li v-for="(posts, i) in sliceCreatePoem" :key="i" id="Post">
           <div class="list_item">
@@ -22,19 +22,19 @@
 </template>
 
 <script>
-import { importedPoem } from "@/api/post";
+import { getPost } from "@/api/post";
 import HeaderVue from "./common/HeaderVue.vue";
 export default {
   data() {
     return {
-      importedPoem: [],
+      getPost: [],
     };
   },
   methods: {
     async fetchCreatePoem() {
       try {
-        const { data } = await importedPoem();
-        this.importedPoem = data.posts;
+        const { data } = await getPost();
+        this.getPost = data.posts;
       } catch (error) {
         console.log(error);
         alert("로그인 해주세요");
@@ -50,7 +50,7 @@ export default {
   },
   computed: {
     sliceCreatePoem() {
-      let sliceCreatePoem = [...this.importedPoem].reverse();
+      let sliceCreatePoem = [...this.getPost].reverse();
       return sliceCreatePoem;
     },
   },
@@ -58,45 +58,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-li {
-  list-style: none;
-}
-#ownPoemArea {
-  width: 50%;
-  height: 100vh;
-  margin: 0 auto;
-  background-color: #fff;
-  padding: 0 1rem;
-  box-sizing: border-box;
-
-  ul {
-    li {
-      border-bottom: 1px solid #333;
-      padding: 1rem 1rem;
-      box-sizing: border-box;
-
-      &:nth-child(1) {
-        // border-top: 1px solid #333;
-      }
-
-      div.list_item {
-        > div {
-          &:nth-child(1) {
-            display: flex;
-            margin-bottom: 1rem;
-
-            > div:nth-child(1) {
-              margin-right: 1rem;
-            }
-          }
-          &:nth-child(2) {
-            a {
-              font-size: 1.2rem;
-            }
-          }
-        }
-      }
-    }
-  }
-}
+@import url(../css/poemlist.css);
 </style>

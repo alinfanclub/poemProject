@@ -2,33 +2,8 @@
   <div>
     <HeaderVue></HeaderVue>
     <div id="createPost">
-      <!-- <form @submit.prevent="createNewPost">
-      <div>
-        <label for="title">제목</label>
-        <input type="text" name="title" id="title" v-model="title" />
-      </div>
-      <div>
-        <label for="author">작가</label>
-        <input type="text" name="author" id="author" v-model="author" />
-      </div>
-      <div>
-        <label for="content">내용</label>
-        <textarea type="text" name="content" id="content" v-model="content" />
-      </div>
-
-      <div>
-        <label for="type">종류</label>
-        <select id="type" v-model="type">
-          <option value="자작 시">자삭 시</option>
-          <option value="가져온 시">가져온 시</option>
-        </select>
-      </div>
-      <button>submit</button>
-      <p v-if="logMsg">{{ logMsg }}</p>
-    </form> -->
       <div class="postInfo">
         <div>
-          <!-- <label for="title">제목</label> -->
           <input
             type="text"
             name="title"
@@ -38,7 +13,6 @@
           />
         </div>
         <div>
-          <!-- <label for="author">작가</label> -->
           <input
             type="text"
             name="author"
@@ -48,7 +22,6 @@
           />
         </div>
         <div>
-          <!-- <label for="type">종류</label> -->
           <select id="type" v-model="type">
             <option value="null" disabled>시 종류</option>
             <option value="자작 시">자삭 시</option>
@@ -57,11 +30,9 @@
         </div>
       </div>
       <div id="editor" ref="toastuiEditor"></div>
-      <!-- <button @click="getMarkdown()">sumit</button> -->
       <div class="submit_btn">
         <button class="" @click="createNewPost()">SUBMIT</button>
       </div>
-      <!-- <button @click="getHtml()">sumithtml</button> -->
     </div>
   </div>
 </template>

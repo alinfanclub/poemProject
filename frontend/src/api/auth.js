@@ -4,7 +4,7 @@ import { setInterceptors } from "@/api/interceptor";
 
 function crateInstance() {
   const instance = axios.create({
-    baseURL: "https://kodpp.com/user",
+    baseURL: "http://localhost:3000/user",
   });
   return setInterceptors(instance);
 }

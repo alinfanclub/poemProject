@@ -28,6 +28,16 @@
       {{ postData.content }}
     </div> -->
       <div id="viewer"></div>
+      <form @submit.prevent="this.createComment">
+        <label for="commentString">댓글 작성</label>
+        <input
+          type="text"
+          name="commentString"
+          id="commentString"
+          v-model="comment"
+        />
+        <button>전송</button>
+      </form>
       <p v-if="error">{{ this.error }}</p>
     </div>
   </div>
@@ -35,6 +45,7 @@
 
 <script>
 import { getPostDetail, deletePost } from "@/api/post";
+import { AddComment } from "@/api/comment";
 import Viewer from "@toast-ui/editor/dist/toastui-editor-viewer";
 import "@toast-ui/editor/dist/toastui-editor.css";
 import HeaderVue from "@/components/common/HeaderVue.vue";
@@ -49,6 +60,7 @@ export default {
       postData: "",
       error: "",
       viewer: null,
+      comment: "",
     };
   },
   mounted() {
@@ -85,11 +97,22 @@ export default {
         const con_delete = confirm("정말로 삭제 하시겠습니까?");
         if (con_delete) {
           await deletePost(id);
-          this.$router.push("/main");
+          this.$router.go(-1);
         }
       } catch (err) {
         this.error = err.message;
         console.log(err);
+      }
+    },
+    async createComment() {
+      try {
+        const commentData = {
+          comment: this.comment,
+          location: this.$route.params.id,
+        };
+        await AddComment(commentData);
+      } catch (error) {
+        console.log(error);
       }
     },
   },

@@ -4,25 +4,29 @@ const bodyparser = require("body-parser");
 const express = require("express");
 const app = express();
 const chalk = require("chalk");
-const { routerUser, Postrouter } = require("./src/api");
+const { routerUser, Postrouter, CommentRouter } = require("./src/api");
+const path = require("path");
+const fs = require("fs");
 
 // mongodb URL
 const MONGO_URI =
   "mongodb+srv://kimseounghun:tkgl5012qq21@mongodbstudy.rgulq2j.mongodb.net/BlogService?retryWrites=true&w=majority";
 
-app.use( cors({
-  origin: '*'
-}));
 const sever = async () => {
   try {
     await mongoose.connect(MONGO_URI);
     mongoose.set("debug", true);
     console.log("mongoDB is connected!");
     app.use(express.json());
+    app.use(
+      cors({
+        origin: "*",
+      })
+    );
     // api
-
     app.use("/user", routerUser);
     app.use("/post", Postrouter);
+    app.use("/comment", CommentRouter);
     // utils
 
     // server setup

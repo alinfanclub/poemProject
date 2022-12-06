@@ -40,6 +40,9 @@ function importedPoem() {
 function updatePost(id, postData) {
   return instance.put(`post/${id}`, postData);
 }
+function temporarily(postData) {
+  return instance.put(`post/temporarily`, postData);
+}
 
 export {
   createPost,
@@ -49,4 +52,5 @@ export {
   ownpoem,
   importedPoem,
   updatePost,
+  temporarily,
 };

@@ -20,14 +20,45 @@ Postrouter.post("/", authenticateUser, async (req, res) => {
   }
 });
 
-Postrouter.get("/", async (req, res) => {
+Postrouter.post("/temporarily", authenticateUser, async (req, res) => {
+  try {
+    res.header("Access-Control-Allow-Origin", "*");
+    const doc = await Post.create({
+      ...req.body,
+      createdBy: req.user._id,
+    });
+    res.status(201).json({ data: doc });
+  } catch (error) {
+    console.log(error);
+    if (error.code === 11000) {
+      return res.status(400).send({ message: "Duplicated Data", error });
+    }
+    res.status(400).send({ message: "sth wrong", error });
+  }
+});
+
+Postrouter.get("/temporarilyGet", async (req, res) => {
   try {
     res.header("Access-Control-Allow-Origin", "*");
     const docs = await Post.find({
-      // createdBy: req.user._id,
+      createdBy: req.user._id,
     })
       .lean()
       .exec();
+
+    res.status(200).json({
+      posts: docs,
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(400).json({ message: "sth wrong", error });
+  }
+});
+
+Postrouter.get("/", async (req, res) => {
+  try {
+    res.header("Access-Control-Allow-Origin", "*");
+    const docs = await Post.find({}).lean().exec();
 
     res.status(200).json({
       posts: docs,

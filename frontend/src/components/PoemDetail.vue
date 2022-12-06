@@ -46,7 +46,10 @@
         <div>
           <ul>
             <li v-for="comments in this.commentsdata" :key="comments">
-              <div>{{ comments.nickname }}</div>
+              <div>
+                {{ comments.nickname
+                }}<span @click="this.deleteComment(comments._id)">X</span>
+              </div>
               <!-- <textarea :value="comments.comment" readonly></textarea> -->
               <pre>{{ comments.comment }}</pre>
             </li>
@@ -60,7 +63,7 @@
 
 <script>
 import { getPostDetail, deletePost } from "@/api/post";
-import { AddComment, GetComment } from "@/api/comment";
+import { AddComment, GetComment, DeleteComment } from "@/api/comment";
 import Viewer from "@toast-ui/editor/dist/toastui-editor-viewer";
 import "@toast-ui/editor/dist/toastui-editor.css";
 import HeaderVue from "@/components/common/HeaderVue.vue";
@@ -78,6 +81,7 @@ export default {
       comment: "",
       commentsdata: [],
       commentLength: "",
+      commentName: "",
     };
   },
   mounted() {
@@ -148,6 +152,22 @@ export default {
       } catch (error) {
         console.log(error);
       }
+    },
+    async deleteComment(e) {
+      try {
+        // const com_delete = prompt("정말로 삭제 하시겠습니까?", [
+        //   "댓글 내용을 입력해주세요",
+        // ]);
+        const con_delete = confirm("정말로 삭제 하시겠습니까?");
+        if (con_delete) {
+          await DeleteComment(e);
+        }
+        this.getComments();
+      } catch (err) {
+        this.error = err.message;
+        console.log(err);
+      }
+      console.log(e);
     },
   },
   created() {

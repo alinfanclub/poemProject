@@ -132,7 +132,11 @@ export default {
         this.getComments();
       } catch (error) {
         console.log(error);
-        alert("내용을 입력해 주세요");
+        if (!this.comment) {
+          alert("내용을 입력해 주세요");
+        } else {
+          alert("로그인 하셨나요?");
+        }
       }
     },
     async getComments() {
@@ -361,6 +365,52 @@ li {
         font-size: 1rem;
       }
     }
+
+    .commentArea {
+      form {
+        > div {
+          width: 90%;
+          text-align: right;
+        }
+        textarea {
+          margin: 1rem 0;
+          border: 1px solid #ddd;
+          width: 100%;
+          height: 15rem;
+          outline: none;
+          resize: none;
+        }
+        button {
+          width: 4rem;
+          height: 2rem;
+          background-color: rgb(202, 202, 9);
+          border-radius: 5px;
+          text-align: center;
+          color: white;
+
+          &:hover {
+            background-color: olive;
+          }
+        }
+        margin-bottom: 1rem;
+      }
+      > div {
+        height: fit-content;
+        li {
+          padding-bottom: 1rem;
+          margin-bottom: 2rem;
+          border-bottom: 1px solid #ddd;
+          > div:nth-child(1) {
+            margin-bottom: 1rem;
+            font-size: 0.8rem;
+          }
+          pre {
+            margin-left: 1rem;
+            font-size: 1rem;
+          }
+        }
+      }
+    }
   }
   #viewer {
     min-height: calc(100vh - 370px);
@@ -375,51 +425,6 @@ li {
     }
     .toastui-editor-contents {
       font-size: 0.9rem;
-    }
-  }
-  .commentArea {
-    form {
-      > div {
-        width: 90%;
-        text-align: right;
-      }
-      textarea {
-        margin: 1rem 0;
-        border: 1px solid #ddd;
-        width: 100%;
-        height: 15rem;
-        outline: none;
-        resize: none;
-      }
-      button {
-        width: 4rem;
-        height: 2rem;
-        background-color: rgb(202, 202, 9);
-        border-radius: 5px;
-        text-align: center;
-        color: white;
-
-        &:hover {
-          background-color: olive;
-        }
-      }
-      margin-bottom: 1rem;
-    }
-    > div {
-      height: fit-content;
-      li {
-        padding-bottom: 1rem;
-        margin-bottom: 2rem;
-        border-bottom: 1px solid #ddd;
-        > div:nth-child(1) {
-          margin-bottom: 1rem;
-          font-size: 0.8rem;
-        }
-        pre {
-          margin-left: 1rem;
-          font-size: 1rem;
-        }
-      }
     }
   }
 }

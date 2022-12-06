@@ -15,5 +15,8 @@ const instance = crateInstance();
 function AddComment(commentData) {
   return instance.post("", commentData);
 }
+function GetComment(id) {
+  return instance.get(`/${id}`);
+}
 
-export { AddComment };
+export { AddComment, GetComment };

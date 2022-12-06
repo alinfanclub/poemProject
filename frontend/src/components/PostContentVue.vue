@@ -32,7 +32,7 @@
       <div id="editor" ref="toastuiEditor"></div>
       <div class="submit_btn">
         <button class="" @click="createNewPost()">SUBMIT</button>
-        <button class="" @click="temporarilySave()">임시저장</button>
+        <!-- <button class="" @click="temporarilySave()">임시저장</button> -->
       </div>
     </div>
   </div>

@@ -28,16 +28,31 @@
       {{ postData.content }}
     </div> -->
       <div id="viewer"></div>
-      <form @submit.prevent="this.createComment">
-        <label for="commentString">댓글 작성</label>
-        <input
-          type="text"
-          name="commentString"
-          id="commentString"
-          v-model="comment"
-        />
-        <button>전송</button>
-      </form>
+      <div class="commentArea">
+        <form @submit.prevent="this.createComment">
+          <p>감상평 {{ this.commentLength }}</p>
+          <div>
+            <div>
+              <textarea
+                type="text"
+                name="commentString"
+                id="commentString"
+                v-model="comment"
+              ></textarea>
+            </div>
+            <button>전송</button>
+          </div>
+        </form>
+        <div>
+          <ul>
+            <li v-for="comments in this.commentsdata" :key="comments">
+              <div>{{ comments.nickname }}</div>
+              <!-- <textarea :value="comments.comment" readonly></textarea> -->
+              <pre>{{ comments.comment }}</pre>
+            </li>
+          </ul>
+        </div>
+      </div>
       <p v-if="error">{{ this.error }}</p>
     </div>
   </div>
@@ -45,7 +60,7 @@
 
 <script>
 import { getPostDetail, deletePost } from "@/api/post";
-import { AddComment } from "@/api/comment";
+import { AddComment, GetComment } from "@/api/comment";
 import Viewer from "@toast-ui/editor/dist/toastui-editor-viewer";
 import "@toast-ui/editor/dist/toastui-editor.css";
 import HeaderVue from "@/components/common/HeaderVue.vue";
@@ -61,6 +76,8 @@ export default {
       error: "",
       viewer: null,
       comment: "",
+      commentsdata: [],
+      commentLength: "",
     };
   },
   mounted() {
@@ -111,6 +128,19 @@ export default {
           location: this.$route.params.id,
         };
         await AddComment(commentData);
+        this.comment = "";
+        this.getComments();
+      } catch (error) {
+        console.log(error);
+        alert("내용을 입력해 주세요");
+      }
+    },
+    async getComments() {
+      try {
+        const id = this.$route.params.id;
+        const { data } = await GetComment(id);
+        this.commentsdata = data;
+        this.commentLength = data.length;
       } catch (error) {
         console.log(error);
       }
@@ -118,6 +148,7 @@ export default {
   },
   created() {
     this.getPostDetail();
+    this.getComments();
   },
 };
 </script>
@@ -126,6 +157,9 @@ export default {
 @import url("https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@200;300;400;500;600;700;900&display=swap");
 * {
   text-align: left;
+}
+li {
+  list-style: none;
 }
 #peomDetail {
   background-color: #fff;
@@ -168,6 +202,52 @@ export default {
     }
     ion-icon {
       font-size: 1.5rem;
+    }
+  }
+
+  .commentArea {
+    form {
+      > div {
+        width: 50%;
+        text-align: right;
+      }
+      textarea {
+        margin: 1rem 0;
+        border: 1px solid #ddd;
+        width: 100%;
+        height: 15rem;
+        outline: none;
+        resize: none;
+      }
+      button {
+        width: 4rem;
+        height: 2rem;
+        background-color: rgb(202, 202, 9);
+        border-radius: 5px;
+        text-align: center;
+        color: white;
+
+        &:hover {
+          background-color: olive;
+        }
+      }
+      margin-bottom: 1rem;
+    }
+    > div {
+      height: fit-content;
+      li {
+        padding-bottom: 1rem;
+        margin-bottom: 2rem;
+        border-bottom: 1px solid #ddd;
+        > div:nth-child(1) {
+          margin-bottom: 1rem;
+          font-size: 0.8rem;
+        }
+        pre {
+          margin-left: 1rem;
+          font-size: 1rem;
+        }
+      }
     }
   }
 }
@@ -223,7 +303,7 @@ export default {
     }
   }
   #viewer {
-    min-height: calc(100vh - 215px);
+    min-height: calc(100vh - 370px);
     height: fit-content;
     padding: 0.5rem;
     box-sizing: border-box;
@@ -283,7 +363,7 @@ export default {
     }
   }
   #viewer {
-    min-height: calc(100vh - 215px);
+    min-height: calc(100vh - 370px);
     height: fit-content;
     padding: 0.5rem;
     box-sizing: border-box;

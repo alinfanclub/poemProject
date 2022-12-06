@@ -10,7 +10,8 @@ import { setInterceptors } from "@/api/interceptor";
 // }
 function crateInstance() {
   const instance = axios.create({
-    baseURL: "http://localhost:3000/user",
+    baseURL:
+      "https://port-0-poemproject-11er1a24lbbi8bv8.gksl2.cloudtype.app/user",
   });
   return setInterceptors(instance);
 }

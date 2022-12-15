@@ -50,7 +50,7 @@
                 <p>{{ comments.nickname }}</p>
 
                 <ion-icon
-                  v-if="postData.owner == this.$store.state.userName"
+                  v-if="comments.nickname == this.$store.state.userName"
                   name="trash-outline"
                   @click="this.deleteComment(comments._id)"
                 ></ion-icon>

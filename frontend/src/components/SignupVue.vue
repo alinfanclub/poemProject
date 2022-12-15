@@ -2,8 +2,8 @@
   <div>
     <form @submit.prevent="submitForm">
       <div>
-        <label for="userId">ID</label>
-        <input v-model="username" type="text" name="userId" id="userId" />
+        <label for="userId">E-mail</label>
+        <input v-model="username" type="email" name="userId" id="userId" />
       </div>
       <div>
         <label for="userPassword">Passwrod</label>
@@ -52,6 +52,7 @@ export default {
         console.log(data.username);
         this.logMsg = `${data.nickname}님이 성공적으로 가입 되었습니다.`;
         this.initForm();
+        this.$router.push("/login");
       } catch (error) {
         this.logMsg = "올바른 입력값을 넣어 주세요";
       }

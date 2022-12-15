@@ -46,9 +46,14 @@
         <div>
           <ul>
             <li v-for="comments in this.commentsdata" :key="comments">
-              <div>
-                {{ comments.nickname
-                }}<span @click="this.deleteComment(comments._id)">X</span>
+              <div class="commentTit">
+                <p>{{ comments.nickname }}</p>
+
+                <ion-icon
+                  v-if="postData.owner == this.$store.state.userName"
+                  name="trash-outline"
+                  @click="this.deleteComment(comments._id)"
+                ></ion-icon>
               </div>
               <!-- <textarea :value="comments.comment" readonly></textarea> -->
               <pre>{{ comments.comment }}</pre>
@@ -263,6 +268,19 @@ li {
         padding-bottom: 1rem;
         margin-bottom: 2rem;
         border-bottom: 1px solid #ddd;
+
+        > div {
+          display: flex;
+          align-items: center;
+
+          > p {
+            margin-right: 1rem;
+          }
+
+          > ion-icon {
+            cursor: pointer;
+          }
+        }
         > div:nth-child(1) {
           margin-bottom: 1rem;
           font-size: 0.8rem;

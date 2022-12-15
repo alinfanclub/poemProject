@@ -24,7 +24,7 @@
         <div>
           <select id="type" v-model="type">
             <option value="null" disabled>시 종류</option>
-            <option value="자작 시">자삭 시</option>
+            <option value="창작 시">창작 시</option>
             <option value="가져온 시">가져온 시</option>
           </select>
         </div>
@@ -58,7 +58,7 @@ export default {
   data() {
     return {
       title: "",
-      type: "자작 시",
+      type: "창작 시",
       author: "",
       content: "",
       logMsg: "",

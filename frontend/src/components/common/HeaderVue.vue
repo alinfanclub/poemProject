@@ -1,6 +1,6 @@
 <template>
   <div id="Header">
-    <p><router-link to="/">PoemProject</router-link></p>
+    <p><router-link to="/">Boosiraegi</router-link></p>
     <div>
       <div v-if="this.$store.state.userName" class="login">
         <p class="user_name" @click="mb_toggle">

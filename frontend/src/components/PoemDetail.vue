@@ -56,7 +56,7 @@
                 ></ion-icon>
               </div>
               <!-- <textarea :value="comments.comment" readonly></textarea> -->
-              <pre>{{ comments.comment }}</pre>
+              <p>{{ comments.comment }}</p>
             </li>
           </ul>
         </div>
@@ -242,6 +242,8 @@ li {
       }
       textarea {
         margin: 1rem 0;
+        padding: 1rem;
+        box-sizing: border-box;
         border: 1px solid #ddd;
         width: 100%;
         height: 15rem;
@@ -285,9 +287,10 @@ li {
           margin-bottom: 1rem;
           font-size: 0.8rem;
         }
-        pre {
+        p {
           margin-left: 1rem;
           font-size: 1rem;
+          white-space: break-spaces;
         }
       }
     }

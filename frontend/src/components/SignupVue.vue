@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="signupPage">
     <form @submit.prevent="submitForm">
       <div>
         <label for="userId">E-mail</label>
@@ -48,13 +48,20 @@ export default {
           password: this.password,
           nickname: this.nickname,
         };
-        const { data } = await registerUser(userData);
-        console.log(data.username);
-        this.logMsg = `${data.nickname}님이 성공적으로 가입 되었습니다.`;
-        this.initForm();
-        this.$router.push("/login");
+
+        const signupCheck = confirm("정말로 가입 하시겠습니까?");
+        if (signupCheck) {
+          const { data } = await registerUser(userData);
+          console.log(data.username);
+          this.logMsg = `${data.nickname}님이 성공적으로 가입 되었습니다.`;
+          this.initForm();
+          alert(`${data.nickname}님이 성공적으로 가입 되었습니다.`);
+          this.$router.push("/login");
+        }
       } catch (error) {
         this.logMsg = "올바른 입력값을 넣어 주세요";
+        alert("이미 가입되어있습니다.");
+        this.initForm();
       }
     },
     initForm() {
@@ -72,13 +79,57 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-div {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+#signupPage {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 
-  label {
-    margin-right: 20px;
+  form {
+    width: 30rem;
+    > div {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      label {
+        width: 5rem;
+      }
+      input {
+        width: 90%;
+        height: 3rem;
+        margin: 1rem 0;
+        border: none;
+        padding: 0.5rem;
+        box-sizing: border-box;
+        font-size: 1rem;
+        outline: none;
+        background-color: transparent;
+        background-color: #fff;
+        border: 1px solid #c2c2c2;
+
+        &[type="password"] {
+          // // font-size: 2rem;
+          // color: blue;
+          &::placeholder {
+            font-size: 1rem;
+          }
+        }
+      }
+    }
+    button {
+      border: 0;
+      background-color: darkblue;
+      color: #fff;
+      font-size: 1.2rem;
+      padding: 0.3rem 1rem;
+      box-sizing: border-box;
+      border-radius: 5px;
+      width: 10rem;
+      display: flex;
+      justify-content: center;
+      margin: 0 auto;
+      margin-top: 2rem;
+    }
   }
 }
 </style>

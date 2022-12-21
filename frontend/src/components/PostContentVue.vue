@@ -80,6 +80,9 @@ export default {
         exts: ["myExt"],
         placeholder: "Please enter text.",
         plugins: [[colorSyntax, codeSyntaxHighlight, { highlighter: Prism }]],
+        hooks: {
+          addImageBlobHook: this.upload,
+        },
       });
     } else {
       this.editor = new Editor({
@@ -90,6 +93,7 @@ export default {
         previewHighlight: false,
         exts: ["myExt"],
         placeholder: "Please enter text.",
+        plugins: [[colorSyntax, codeSyntaxHighlight, { highlighter: Prism }]],
       });
     }
   },
@@ -113,6 +117,32 @@ export default {
     getMarkdown() {
       this.markdown = this.editor.getMarkdown();
       console.log(this.markdown);
+    },
+    async upload(file, setText) {
+      try {
+        if (!file) return false;
+
+        // 이미지 제외 막기 처리하기
+        if (file && file.size > 5242880) {
+          const size = (file.size / (1000 * 1000)).toFixed(1);
+          alert(
+            `최대 업로드 사이즈(5 MB)를 초과 하였습니다.\n현재 사이즈 ${size}MB`
+          );
+
+          return false;
+        }
+        // api 업로드 만들기
+        const formData = new FormData();
+        formData.append("image", file);
+        // 요청 보내고
+        // 해당 부분은 구현해야한다
+        // const { data } = await uploadImageFile(formData);
+        // if (data.success === true) {
+        setText("data.file_path", "image");
+        // }
+      } catch (e) {
+        alert("파일 업로드에 실패하였습니다");
+      }
     },
   },
 };

@@ -81,7 +81,7 @@ export default {
         placeholder: "Please enter text.",
         plugins: [[colorSyntax, codeSyntaxHighlight, { highlighter: Prism }]],
         hooks: {
-          addImageBlobHook: this.upload,
+          // addImageBlobHook: this.upload,
         },
       });
     } else {
@@ -138,7 +138,7 @@ export default {
         // 해당 부분은 구현해야한다
         // const { data } = await uploadImageFile(formData);
         // if (data.success === true) {
-        setText("data.file_path", "image");
+        setText(file.name, "image");
         // }
       } catch (e) {
         alert("파일 업로드에 실패하였습니다");
